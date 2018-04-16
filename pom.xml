@@ -43,7 +43,7 @@
         <repository>
             <id>pvt15Group05.repo</id>
             <name>PVT15Group05 repo</name>
-            <url>git://saho6409@git.dsv.su.se/git/PVT15Group5.git</url>
+            <url>https://github.com/Minijaa/PlayGroundLight.git</url>
         </repository>
     </distributionManagement>
     <build>
@@ -55,7 +55,6 @@
             </extension>
         </extensions>
         <plugins>
-
         </plugins>
     </build>
 </project>
