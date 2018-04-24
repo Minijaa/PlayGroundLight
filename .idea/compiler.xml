@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gs-maven" />
+        <module name="playground" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="gs-maven" target="1.8" />
+      <module name="playground" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
