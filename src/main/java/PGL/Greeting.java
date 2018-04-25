@@ -1,3 +1,4 @@
+package PGL;
 public class Greeting {
     private String data;
 
