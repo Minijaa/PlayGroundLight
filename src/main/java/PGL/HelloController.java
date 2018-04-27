@@ -13,10 +13,10 @@ import java.lang.reflect.Array;
 public class HelloController {
     private static final String template = "Hello, %s!";
 
-    @RequestMapping("/")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "Pelle") String name) {
-        return new Greeting(String.format(template, name));
-    }
+//    @RequestMapping("/")
+//    public Greeting greeting(@RequestParam(value = "name", defaultValue = "Pelle") String name) {
+//        return new Greeting(String.format(template, name));
+//    }
 
     @RequestMapping("/list")
     public Greeting[] getList() {
