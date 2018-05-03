@@ -64,15 +64,19 @@ public class GameController {
         stopAllGames();
 
     }
-
-    public void stopAllGames() {
+    @RequestMapping("/stopgames")
+    public String stopAllGames() {
         for (Game g : games) {
             // g.getTotalGameTimer().cancel();
             if (g.getLightLitDurationTimer() != null){
                 g.getLightLitDurationTimer().cancel();
             }
-
         }
+        for (LightPost l : lightPosts){
+            l.setColor(3);
+        }
+        System.out.println("All games stopped");
+        return "All games stopped";
     }
 
     @RequestMapping("/games")

@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f3b5b160-f1d1-4c33-a098-b6e5b184606b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PGL/Game.java" afterPath="$PROJECT_DIR$/src/main/java/PGL/Game.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PGL/GameController.java" afterPath="$PROJECT_DIR$/src/main/java/PGL/GameController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PGL/LightController.java" afterPath="$PROJECT_DIR$/src/main/java/PGL/LightController.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PGL/Game.class" afterPath="$PROJECT_DIR$/target/classes/PGL/Game.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PGL/GameController.class" afterPath="$PROJECT_DIR$/target/classes/PGL/GameController.class" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PGL/LightController.java" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,7 +54,7 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/PGL/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="1633">
               <caret line="80" column="19" lean-forward="false" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -85,27 +82,18 @@
       <file leaf-file-name="LightPost.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/PGL/LightPost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#224#225#0" expanded="true" />
                 <element signature="e#251#252#0" expanded="true" />
                 <element signature="e#291#292#0" expanded="true" />
                 <element signature="e#323#324#0" expanded="true" />
+                <element signature="e#352#353#0" expanded="true" />
                 <element signature="e#380#381#0" expanded="true" />
                 <element signature="e#419#420#0" expanded="true" />
                 <element signature="e#453#454#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LightController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/PGL/LightController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="12" column="2" lean-forward="false" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -143,14 +131,14 @@
       <file leaf-file-name="GameController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/PGL/GameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1079">
-              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="78" column="35" lean-forward="true" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2601#2602#0" expanded="true" />
-                <element signature="e#2629#2630#0" expanded="true" />
-                <element signature="e#2918#2919#0" expanded="true" />
-                <element signature="e#2954#2955#0" expanded="true" />
+                <element signature="e#2797#2798#0" expanded="true" />
+                <element signature="e#2825#2826#0" expanded="true" />
+                <element signature="e#3114#3115#0" expanded="true" />
+                <element signature="e#3150#3151#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -389,7 +377,7 @@
       <workItem from="1525176113192" duration="702000" />
       <workItem from="1525261966015" duration="25166000" />
       <workItem from="1525333231523" duration="10074000" />
-      <workItem from="1525344744284" duration="23182000" />
+      <workItem from="1525344744284" duration="23953000" />
     </task>
     <task id="LOCAL-00001" summary="Lyktstolpe implementerad">
       <created>1525079308718</created>
@@ -398,11 +386,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525079308718</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Spellogiken för de 3 spelen är implementerad. Jag behöver städa och snygga till koden  men den bör fungera iaf.">
+      <created>1525383538004</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1525383538004</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91180000" />
+    <option name="totallyTimeSpent" value="91951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -476,7 +471,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Lyktstolpe implementerad" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lyktstolpe implementerad" />
+    <MESSAGE value="Spellogiken för de 3 spelen är implementerad. Jag behöver städa och snygga till koden  men den bör fungera iaf." />
+    <option name="LAST_COMMIT_MESSAGE" value="Spellogiken för de 3 spelen är implementerad. Jag behöver städa och snygga till koden  men den bör fungera iaf." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -499,10 +495,10 @@
           <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2601#2602#0" expanded="true" />
-            <element signature="e#2629#2630#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
+            <element signature="e#2825#2826#0" expanded="true" />
+            <element signature="e#3114#3115#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -524,6 +520,7 @@
             <element signature="e#251#252#0" expanded="true" />
             <element signature="e#291#292#0" expanded="true" />
             <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
             <element signature="e#380#381#0" expanded="true" />
             <element signature="e#419#420#0" expanded="true" />
             <element signature="e#453#454#0" expanded="true" />
@@ -553,10 +550,10 @@
           <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2601#2602#0" expanded="true" />
-            <element signature="e#2629#2630#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
+            <element signature="e#2825#2826#0" expanded="true" />
+            <element signature="e#3114#3115#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -612,6 +609,7 @@
             <element signature="e#251#252#0" expanded="true" />
             <element signature="e#291#292#0" expanded="true" />
             <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
             <element signature="e#380#381#0" expanded="true" />
             <element signature="e#419#420#0" expanded="true" />
             <element signature="e#453#454#0" expanded="true" />
@@ -639,10 +637,10 @@
           <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2601#2602#0" expanded="true" />
-            <element signature="e#2629#2630#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
+            <element signature="e#2825#2826#0" expanded="true" />
+            <element signature="e#3114#3115#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -697,6 +695,7 @@
             <element signature="e#251#252#0" expanded="true" />
             <element signature="e#291#292#0" expanded="true" />
             <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
             <element signature="e#380#381#0" expanded="true" />
             <element signature="e#419#420#0" expanded="true" />
             <element signature="e#453#454#0" expanded="true" />
@@ -724,10 +723,10 @@
           <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2601#2602#0" expanded="true" />
-            <element signature="e#2629#2630#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
+            <element signature="e#2825#2826#0" expanded="true" />
+            <element signature="e#3114#3115#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -774,6 +773,7 @@
             <element signature="e#251#252#0" expanded="true" />
             <element signature="e#291#292#0" expanded="true" />
             <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
             <element signature="e#380#381#0" expanded="true" />
             <element signature="e#419#420#0" expanded="true" />
             <element signature="e#453#454#0" expanded="true" />
@@ -942,30 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PGL/LightController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="12" column="2" lean-forward="false" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PGL/LightPost.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#224#225#0" expanded="true" />
-            <element signature="e#251#252#0" expanded="true" />
-            <element signature="e#291#292#0" expanded="true" />
-            <element signature="e#323#324#0" expanded="true" />
-            <element signature="e#380#381#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PGL/Greeting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -974,9 +950,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/PGL/LightController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-703">
+          <caret line="12" column="2" lean-forward="false" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/PGL/LightPost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#224#225#0" expanded="true" />
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#291#292#0" expanded="true" />
+            <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#380#381#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PGL/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="1633">
           <caret line="80" column="19" lean-forward="false" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1002,14 +1003,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PGL/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1079">
-          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="396">
+          <caret line="78" column="35" lean-forward="true" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2601#2602#0" expanded="true" />
-            <element signature="e#2629#2630#0" expanded="true" />
-            <element signature="e#2918#2919#0" expanded="true" />
-            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
+            <element signature="e#2825#2826#0" expanded="true" />
+            <element signature="e#3114#3115#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
           </folding>
         </state>
       </provider>
