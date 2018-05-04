@@ -9,8 +9,5 @@
         <module name="gs-maven" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="gs-maven" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
