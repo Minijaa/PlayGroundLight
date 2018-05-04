@@ -1,9 +1,6 @@
 package PGL;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
@@ -14,8 +11,20 @@ public class User {
     private int id;
     private String name;
     private String email;
+
     private String password;
     private ArrayList<User> friends = new ArrayList<>();
+
+    /**
+     * Needs a empty constructor
+     */
+    public User() {
+    }
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     public int getId() {
         return id;

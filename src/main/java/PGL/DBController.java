@@ -12,10 +12,8 @@ public class DBController {
 
     @GetMapping("/dbadd")
     public @ResponseBody
-    String addNewUser (@RequestParam String name, @RequestParam String e) {
-        User newUser = new User();
-        newUser.setName(name);
-        newUser.setEmail(e);
+    String addNewUser (@RequestParam String name, @RequestParam String email) {
+       User newUser = new User(name, email);
         userRepository.save(newUser);
         return "Saved";
     }
@@ -25,7 +23,5 @@ public class DBController {
     Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
-
-
 
 }
