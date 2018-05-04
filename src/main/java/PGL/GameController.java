@@ -4,32 +4,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:8100", "file://", "http://localhost:8000", "127.0.0.1", "http://192.168.0.17:8000", "http://10.200.3.220:8000", "https://www.musikshopen.com:8000", "https://www.musikshopen.com", "https://www.musikshopen.com:8100", "https://www.musikshopen.com:443"})
 public class GameController {
     private LightPost[] lightPosts;
-    private Game[] games;
-    private Timer lightLitDurationTimer;
-    private Random ran = new Random();
-    private int delay;
-
     public GameController() {
         lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white")), new LightPost("LightPost4", c("white"))};
         games = new Game[]{(new Game("runhere", "Some rules", this)), new Game("redlamp", "Bla2", this), new Game("danger", "Bla3", this)};
-
-        // Kod för att starta executorn
-        //startGameRunHereOrDanger(1, true, games[0]);
-//        try{
-//            games[0].executor(1, true);
-//        }catch (InterruptedException a){
-//            //
-//        }
     }
+
+    private Game[] games;
 
     @RequestMapping("/game")
     public String setupGame(
@@ -70,6 +57,7 @@ public class GameController {
             // g.getTotalGameTimer().cancel();
             if (g.getLightLitDurationTimer() != null){
                 g.getLightLitDurationTimer().cancel();
+                g.setRedGreenFlipCounter(0); // Kan tas bort när variablen har ändrats till boolean.
             }
         }
         for (LightPost l : lightPosts){
@@ -131,54 +119,4 @@ public class GameController {
             l.setColor(color);
         }
     }
-
-
-//    public void initiateLightTimer(int color, boolean firstRun, Game game) {
-//        if (color < 0 || color > 1) {
-//            throw new IllegalArgumentException();
-//        }
-//        //boolean first = firstRun;
-////        if (firstRun) {
-////            // Lägg till en fast tid innan spelet börjar. Nedräkning 5 eller 10 sek. Ev gula lampor?
-////            Timer initialTimer = new Timer();
-////            int initialDelay = 1000;
-////            initialTimer.schedule(new TimerTask() {
-////                @Override
-////                public void run() {
-////                    System.out.println("GULA LAMPOR!!!");
-////                    gameController.lightAllLightPosts(2);
-////                    initialTimer.cancel();
-////                }
-////            }, initialDelay);
-////        }
-//        // Ta fram en random-delay baserad på det aktuella spelets intervall-regler.
-//        int nextRandom = ran.nextInt((game.getTimeStopInterval() - game.getTimeStartInterval()) + game.getTimeStartInterval());
-//
-//        //Första delayen ska vara hårdkodad. Under delayen ska också alla lampor vara tända gula.
-//        if (firstRun) {
-//            delay = 5000;
-//            System.out.println("Alla stolpar är GULA!!!");
-////            for (int i = 0; i < lightPosts.length ; i++){
-////                lightPosts[i].setColor(color);
-////            }
-//            lightAllLightPosts(color);
-//
-//        } else {
-//            delay = nextRandom * 1000;
-//        }
-//        Timer timer = new Timer("lightduration", true);
-//
-//        timer.schedule(new TimerTask() {
-//            public void run() {
-//                //Tänd en random lampa med vald färg.
-//                lightRandomLightPost(color);
-//
-//                System.out.println("delay = " + delay / 1000 + " sekunder ");
-//                //period = 500;
-//                //timer.cancel();
-//                initiateLightTimer(color, false, game);
-//            }
-//        }, delay);
-//    }
-
 }

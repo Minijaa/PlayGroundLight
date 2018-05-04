@@ -3,7 +3,6 @@ package PGL;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
     private String name;
@@ -15,8 +14,7 @@ public class Game {
     private GameController gc;
     private int delay;
     private int initialDelay;
-    int counter = 0;
-    TimeUnit timeUnit = TimeUnit.SECONDS;
+    private int redGreenFlipCounter = 0; // Bör ändras till boolean
 
     //private String lightConfig; //this is just a reminder that it should have some sort of config for how the lights are used
 
@@ -64,6 +62,10 @@ public class Game {
         return timeStartInterval;
     }
 
+    public void setRedGreenFlipCounter(int redGreenFlipCounter) {
+        this.redGreenFlipCounter = redGreenFlipCounter;
+    }
+
     public int getTimeStopInterval() {
         return timeStopInterval;
     }
@@ -107,12 +109,12 @@ public class Game {
 
         lightLitDurationTimer.schedule(new TimerTask() {
             public void run() {
-                if (counter % 2 == 1) {
+                if (redGreenFlipCounter % 2 == 1) {
                     gc.getLightPostOne().setColor(1);
-                    counter--;
+                    redGreenFlipCounter--;
                 } else {
                     gc.getLightPostOne().setColor(0);
-                    counter++;
+                    redGreenFlipCounter++;
                 }
 
                 System.out.println("delay = " + delay / 1000 + " sekunder ");
@@ -126,8 +128,12 @@ public class Game {
         if (color < 0 || color > 2) {
             throw new IllegalArgumentException();
         }
+        redGreenFlipCounter = 0; // kan tas bort efter omvandling till boolean.
 
+        // Ta fram en random-delay baserad på det aktuella spelets intervall-regler.
         int nextRandom = ran.nextInt((timeStopInterval - timeStartInterval)) + timeStartInterval;
+
+        //Första delayen ska vara hårdkodad. Under delayen ska också alla lampor vara tända gula.
         if (firstRun) {
             delay = initialDelay * 1000;
             // Gör alla stolpar gula
@@ -148,46 +154,4 @@ public class Game {
             }
         }, delay);
     }
-
-//    public void executor(int color, boolean firstRun)
-//            throws InterruptedException {
-//        if (color < 0 || color > 1) {
-//            throw new IllegalArgumentException();
-//        }
-//        int nextRandom = ran.nextInt((timeStopInterval - timeStartInterval)) + timeStartInterval;
-//        if (firstRun) {
-//            delay = 5000;
-//            System.out.println("Alla stolpar är GULA!!!");
-//
-//            gc.lightAllLightPosts(0);
-//
-//        } else {
-//            delay = nextRandom * 1000;
-//        }
-//        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-//        TimerTask tt = new TimerTask() {
-//            public void run() {
-//                //System.out.println("Task performed on " + new Date());
-//                //Tänd en random lampa med vald färg.
-//
-//                gc.lightRandomLightPost(color);
-//                System.out.println("delay = " + delay / 1000 + " sekunder ");
-//                executor.shutdownNow();
-//                try {
-//                    executor(color, false);
-//                } catch (InterruptedException a) {
-//                    //
-//                }
-//            }
-//        };
-//
-//        //long delay = 1000L;
-//        //long period = 1000L;
-//        executor.schedule(tt, delay, TimeUnit.MILLISECONDS);
-//
-//        //executor.scheduleAtFixedRate(repeatedTask, delay, period, TimeUnit.MILLISECONDS);
-//        //Thread.sleep(delay + period * 5);
-//
-//    }
-
 }
