@@ -31,7 +31,7 @@ public class Game {
             case "runhere":
                 timeStartInterval = 7;
                 timeStopInterval = 18;
-                initialDelay = 5;
+                initialDelay = 10;
 
                 break;
             case "redlamp":
@@ -42,7 +42,7 @@ public class Game {
             case "danger":
                 timeStartInterval = 7;
                 timeStopInterval = 18;
-                initialDelay = 5;
+                initialDelay = 10;
 
                 break;
             default:
