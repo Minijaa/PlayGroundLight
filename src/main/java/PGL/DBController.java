@@ -1,12 +1,12 @@
 package PGL;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/db")
+@RequestMapping("/db")*/
 public class DBController {
-
+/*
     @Autowired
     private UserRepository userRepository;
 
@@ -25,5 +25,5 @@ public class DBController {
     Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
-
+*/
 }
