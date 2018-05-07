@@ -17,6 +17,10 @@ public class User {
     private String password;
     private ArrayList<User> friends = new ArrayList<>();
 
+    public User () {
+
+    }
+
     public int getId() {
         return id;
     }

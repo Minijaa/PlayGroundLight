@@ -12,10 +12,10 @@ public class DBController {
 
     @GetMapping("/dbadd")
     public @ResponseBody
-    String addNewUser (@RequestParam String name, @RequestParam String e) {
+    String addNewUser (@RequestParam String name, @RequestParam String email) {
         User newUser = new User();
         newUser.setName(name);
-        newUser.setEmail(e);
+        newUser.setEmail(email);
         userRepository.save(newUser);
         return "Saved";
     }
