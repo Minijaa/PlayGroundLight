@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/db")
 public class DBController {
 
-    @Autowired
-    private UserRepository userRepository;
+    //@Autowired
+   // private UserRepository userRepository;
 
     @GetMapping("/dbadd")
     public @ResponseBody
@@ -16,14 +16,14 @@ public class DBController {
         User newUser = new User();
         newUser.setName(name);
         newUser.setEmail(e);
-        userRepository.save(newUser);
+        //userRepository.save(newUser);
         return "Saved";
     }
 
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+        return null;//userRepository.findAll();
     }
 
 }
