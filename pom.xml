@@ -8,10 +8,6 @@
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
-
-    <name>playgroundlights</name>
-    <description>Demo project for Spring Boot</description>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
