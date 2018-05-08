@@ -22,7 +22,7 @@ public class Park {
     }
 
     public int updateVisitors(){
-
+    return visitors;
     }
 
 }
