@@ -36,12 +36,8 @@ public class DBController {
     public @ResponseBody
     String login (String email, String password) {
         User theUser = userRepository.findByEmail(email);
-        if (theUser == null) {
-            return "No user with that email";
-        }
-
-        if (!theUser.getPassword().equals(password)) {
-            return "Wrong password motherfucker";
+        if (theUser == null || !theUser.getPassword().equals(password)) {
+            return "User or password incorrect";
         }
         return "logged in";
     }
