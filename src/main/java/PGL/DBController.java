@@ -43,9 +43,7 @@ public class DBController {
         if (!theUser.getPassword().equals(password)) {
             return "Wrong password motherfucker";
         }
-
-        else
-           return "logged in";
+        return "logged in";
     }
 
 }
