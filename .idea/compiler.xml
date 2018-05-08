@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gs-maven" />
+        <module name="playgroundlights" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="gs-maven" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
