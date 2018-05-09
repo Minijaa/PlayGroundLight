@@ -3,6 +3,8 @@ package PGL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @RestController
 @RequestMapping("/db")
 public class DBController {
@@ -40,6 +42,31 @@ public class DBController {
             return "User or password incorrect";
         }
         return "logged in";
+    }
+
+    @GetMapping(path="/addFriend")
+    public @ResponseBody
+    String addFriend(String emailOne, String emailTwo) {
+        User one = userRepository.findByEmail(emailOne);
+        User two = userRepository.findByEmail(emailTwo);
+        one.addFriend(two);
+        two.addFriend(one);
+
+        return "added";
+    }
+
+    @GetMapping(path="/getFriends")
+    public @ResponseBody
+    String getFriends(String email) {
+        User theUser = userRepository.findByEmail(email);
+        StringBuilder str = new StringBuilder();
+
+        for (User u : theUser.getFriends()) {
+            str.append(u.getName());
+            System.out.println(u.getName());
+        }
+
+        return str.toString();
     }
 
 }
