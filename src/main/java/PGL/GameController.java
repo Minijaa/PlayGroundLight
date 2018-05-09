@@ -1,19 +1,27 @@
 package PGL;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Random;
 
-
+@JsonAutoDetect
 @RestController
 @CrossOrigin(origins = {"http://localhost:8100", "10.200.3.220", "file://", "http://localhost:8000", "127.0.0.1", "http://192.168.0.17:8000", "http://10.200.3.220:8000", "https://www.musikshopen.com:8000", "https://www.musikshopen.com", "https://www.musikshopen.com:8100", "https://www.musikshopen.com:443"})
 public class GameController {
     private LightPost[] lightPosts;
+   //private ObjectMapper mapper = new ObjectMapper();
+
     public GameController() {
         lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white")), new LightPost("LightPost4", c("white"))};
-        games = new Game[]{(new Game("runhere", "Some rules", this)), new Game("redlamp", "Bla2", this), new Game("danger", "Bla3", this)};
+        games = new Game[]{(new Game("runhere", this)), new Game("redlamp", this), new Game("danger", this)};
+        //mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
     private Game[] games;
@@ -51,16 +59,17 @@ public class GameController {
         stopAllGames();
 
     }
+
     @RequestMapping("/stopgames")
     public String stopAllGames() {
         for (Game g : games) {
             // g.getTotalGameTimer().cancel();
-            if (g.getLightLitDurationTimer() != null){
+            if (g.getLightLitDurationTimer() != null) {
                 g.getLightLitDurationTimer().cancel();
                 g.setRedGreenFlipCounter(0); // Kan tas bort när variablen har ändrats till boolean.
             }
         }
-        for (LightPost l : lightPosts){
+        for (LightPost l : lightPosts) {
             l.setColor(3);
         }
         System.out.println("All games stopped");
@@ -80,7 +89,7 @@ public class GameController {
         return lightPosts[lId];
     }
 
-    public LightPost getLightPostOne(){
+    public LightPost getLightPostOne() {
         return lightPosts[0];
     }
 
