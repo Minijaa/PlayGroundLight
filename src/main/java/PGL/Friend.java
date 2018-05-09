@@ -7,8 +7,8 @@ import javax.persistence.*;
  * Hello friend
  */
 
-@Entity
-@Table(name="friends")
+/*@Entity
+@Table(name="friends")*/
 public class Friend {
 
     private User personOne;
