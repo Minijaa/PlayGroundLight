@@ -1,7 +1,7 @@
 package PGL;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.*;
 
 @Entity
 @Table(name="users")
@@ -9,11 +9,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id")
     private int id;
     private String name;
     private String email;
     private String password;
-    private ArrayList<User> friends = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable (
+            name="friends",
+            joinColumns=@JoinColumn(name="personOne", referencedColumnName = "id"),
+            inverseJoinColumns=@JoinColumn(name="personTwo", referencedColumnName = "id"))
+    private List<User> friends;
 
     public User () {
     }
@@ -54,6 +61,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    public List<User> getFriends() {
+        return friends;
     }
 
 }
