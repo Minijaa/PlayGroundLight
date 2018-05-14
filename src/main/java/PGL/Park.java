@@ -1,58 +1,56 @@
 package PGL;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Park {
     private String id;
     private ArrayList<Sensor> sensors = new ArrayList<>();
     private int visitors;
 
-    public Park(String id, int NoOfSensors, int initialVisitors){
-        if(visitors < 0 || NoOfSensors < 1){
+    public Park(String id, int NoOfSensors, int maxVisitors) {
+        Random rnd = new Random();
+        if (visitors < 0 || NoOfSensors < 1) {
             throw new IllegalArgumentException();
         }
         this.id = id;
-        visitors = initialVisitors;
-        for(int i = 0; i < NoOfSensors; i++){
-            sensors.add(new Sensor());
+        visitors = rnd.nextInt(maxVisitors + 1);
+        for (int i = 0; i < NoOfSensors; i++) {
+            sensors.add(new Sensor(maxVisitors));
         }
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public ArrayList<Sensor> getSensors(){
+    public ArrayList<Sensor> getSensors() {
         return sensors;
     }
 
-    public int getVisitors(){
+    public int getVisitors() {
         return visitors;
     }
 
-    public int updateVisitors(){
+    public int updateVisitors() {
         int visitorDiff = 0;
 
-        for(int i = 0; i < sensors.size(); i++){
+        for (int i = 0; i < sensors.size(); i++) {
 
             visitorDiff += sensors.get(i).updateVisitors(visitors);
             System.out.println("sensor update running:" + visitorDiff);
         }
         visitors += visitorDiff;
 
-        if(visitors < 0){
+        if (visitors < 0) {
             visitors = 0;
         }
         System.out.println("updated visitors:" + visitors);
         return visitors;
     }
 
-    public void addSensor(Sensor s){
-        sensors.add(s);
-    }
-
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return id.hashCode();
     }
 
