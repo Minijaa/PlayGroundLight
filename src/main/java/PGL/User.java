@@ -65,6 +65,7 @@ public class User {
 
     public void addFriend(User friend) {
         friends.add(friend);
+        System.out.println("list save: " + friend.getName());
     }
 
     public List<User> getFriends() {

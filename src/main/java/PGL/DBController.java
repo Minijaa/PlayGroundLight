@@ -59,6 +59,7 @@ public class DBController {
     public @ResponseBody
     String getFriends(String email) {
         User theUser = userRepository.findByEmail(email);
+        System.out.println("the user: " + theUser.getName());
         StringBuilder str = new StringBuilder();
 
         for (User u : theUser.getFriends()) {
