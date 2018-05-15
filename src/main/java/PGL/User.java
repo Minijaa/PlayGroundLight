@@ -1,9 +1,11 @@
 package PGL;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
-@Entity
+@Entity(name="User")
 @Table(name="users")
 public class User {
 
@@ -11,18 +13,31 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="id")
     private int id;
+
+    @NotNull
+    @Size(max = 50)
     private String name;
+
+    @NotNull
+    @Size(max = 50)
     private String email;
+
+    @NotNull
+    @Size(max = 50)
     private String password;
 
-    @ManyToMany
+    @ManyToMany ( cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable (
             name="friends",
-            joinColumns=@JoinColumn(name="personOne", referencedColumnName = "id"),
-            inverseJoinColumns=@JoinColumn(name="personTwo", referencedColumnName = "id"))
-    private List<User> friends;
+            joinColumns = @JoinColumn(name="userOne"),
+            inverseJoinColumns = @JoinColumn(name="userTwo"))
+    private Set<User> friends = new HashSet<>();
 
     public User () {
+        //Empty, necessary for the repository
     }
 
     public User (String name, String email, String password) {
@@ -65,11 +80,23 @@ public class User {
 
     public void addFriend(User friend) {
         friends.add(friend);
-        System.out.println("list save: " + friend.getName());
+        System.out.println("adding: " + friend.getName() + " as friend to " + name + "\nFriendset now contains:");
+        for (User u : friends) {
+            System.out.println(u);
+        }
     }
 
-    public List<User> getFriends() {
+    public boolean isFriend(User u) {
+        return friends.contains(u);
+    }
+
+    public Set<User> getFriends() {
         return friends;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

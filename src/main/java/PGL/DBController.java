@@ -55,19 +55,27 @@ public class DBController {
         return "added";
     }
 
-    @GetMapping(path="/getFriends")
+    @GetMapping(path="/friend")
     public @ResponseBody
-    String getFriends(String email) {
-        User theUser = userRepository.findByEmail(email);
-        System.out.println("the user: " + theUser.getName());
-        StringBuilder str = new StringBuilder();
-
-        for (User u : theUser.getFriends()) {
-            str.append(u.getName());
-            System.out.println(u.getName());
-        }
-
-        return str.toString();
+    boolean isFriend(String emailOne, String emailTwo) {
+        User one = userRepository.findByEmail(emailOne);
+        User two = userRepository.findByEmail(emailTwo);
+        return one.isFriend(two);
     }
+
+//    @GetMapping(path="/getFriends")
+//    public @ResponseBody
+//    String getFriends(String email) {
+//        User theUser = userRepository.findByEmail(email);
+//        System.out.println("the user: " + theUser.getName());
+//        StringBuilder str = new StringBuilder();
+//
+//        for (User u : theUser.getFriends()) {
+//            str.append(u.getName());
+//            System.out.println(u.getName());
+//        }
+//
+//        return str.toString();
+//    }
 
 }
