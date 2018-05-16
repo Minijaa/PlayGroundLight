@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Random;
 
 @JsonAutoDetect
@@ -12,6 +13,8 @@ import java.util.Random;
 @CrossOrigin(origins = {"http://localhost:8100", "10.200.3.220", "file://", "http://localhost:8000", "127.0.0.1", "http://192.168.0.14:8000", "http://192.168.0.14:8080", "http://192.168.0.14:80", "http://192.168.0.17:8000", "http://192.168.0.17:80", "http://10.200.3.220:8000", "https://www.musikshopen.com:8000", "https://www.musikshopen.com", "https://www.musikshopen.com:8100", "https://www.musikshopen.com:443"})
 public class GameController {
     private LightPost[] lightPosts;
+    private Game activeGame;
+
     public GameController() {
         lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white")), new LightPost("LightPost4", c("white"))};
         games = new Game[]{(new Game("runhere", this)), new Game("redlamp", this), new Game("danger", this)};
@@ -22,18 +25,48 @@ public class GameController {
     @RequestMapping("/game")
     public String setupGame(
             @RequestParam(value = "type") String gameType) {
-        Game currentGame = null;
-        for (Game g : games) {
-            if (g.getName().equals(gameType)) {
-                currentGame = g;
-            }
-        }
-        if (currentGame == null) {
+//        Game currentGame = null;
+//        for (Game g : games) {
+//            if (g.getName().equals(gameType)) {
+//                currentGame = g;
+//                currentGame.setActive(true);
+//            } else {
+//                g.setActive(false);
+//            }
+//        }
+//        if (currentGame == null) {
+//            throw new IllegalArgumentException("Illegal Game Type");
+//        } else {
+//            currentGame.startGame();
+        if (activeGame == null) {
             throw new IllegalArgumentException("Illegal Game Type");
         } else {
-            currentGame.startGame();
+            activeGame.startGame();
         }
-        return currentGame.getName() + " started";
+        return activeGame.getName() + " started";
+    }
+
+    @RequestMapping("/difficulty")
+    public void setDifficulty(
+            @RequestParam(value = "level", defaultValue = "easy") String diff) {
+
+        activeGame.setDifficulty(diff);
+        System.out.println(activeGame.getName());
+        System.out.println(activeGame.getDifficulty());
+
+    }
+
+    @RequestMapping("/setactive")
+    public void setActive(
+            @RequestParam(value = "gamename", defaultValue = "runhere") String gameName
+    ) {
+        for (Game g : games) {
+            if (g.getName().equals(gameName)) {
+                activeGame = g;
+                //currentGame.setActive(true);
+            }
+        }activeGame.setDifficulty("easy");
+
     }
 
     public int c(String color) {
@@ -48,20 +81,16 @@ public class GameController {
         return 3;
     }
 
-    private void startGame(Game activeGame) {
-        stopAllGames();
-
-    }
     @RequestMapping("/stopgames")
     public String stopAllGames() {
         for (Game g : games) {
             // g.getTotalGameTimer().cancel();
-            if (g.getLightLitDurationTimer() != null){
+            if (g.getLightLitDurationTimer() != null) {
                 g.getLightLitDurationTimer().cancel();
                 g.setRedGreenFlipCounter(0); // Kan tas bort när variablen har ändrats till boolean.
             }
         }
-        for (LightPost l : lightPosts){
+        for (LightPost l : lightPosts) {
             l.setColor(3);
         }
         System.out.println("All games stopped");
@@ -81,7 +110,7 @@ public class GameController {
         return lightPosts[lId];
     }
 
-    public LightPost getLightPostOne(){
+    public LightPost getLightPostOne() {
         return lightPosts[0];
     }
 
