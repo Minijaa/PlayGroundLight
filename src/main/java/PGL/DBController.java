@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:8100", "10.200.3.220", "file://", "http://localhost:8000", "127.0.0.1", "http://192.168.0.14:8000", "http://192.168.0.14:8080", "http://192.168.0.14:80", "http://192.168.0.17:8000", "http://192.168.0.17:80", "http://10.200.3.220:8000", "https://www.musikshopen.com:8000", "https://www.musikshopen.com", "https://www.musikshopen.com:8100", "https://www.musikshopen.com:443"})
 @RequestMapping("/db")
 public class DBController {
 
@@ -15,10 +16,15 @@ public class DBController {
 
     @GetMapping("/dbadd")
     public @ResponseBody
-    String addNewUser (@RequestParam String name, @RequestParam String email, @RequestParam String password) {
+    StringResponse addNewUser (@RequestParam String name, @RequestParam String email, @RequestParam String password) {
         User newUser = new User(name, email, password);
-        userRepository.save(newUser);
-        return "Saved with id: " + newUser.getId();
+        User theUser = userRepository.findByEmail(email);
+        if(theUser != null){
+            return new StringResponse("A user with this email adress already exists.");
+        } else {
+            userRepository.save(newUser);
+            return new StringResponse("Saved with id: " + newUser.getId());
+        }
     }
 
     @GetMapping("/get")
