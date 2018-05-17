@@ -36,12 +36,12 @@ public class DBController {
 
     @GetMapping(path="/login")
     public @ResponseBody
-    String login (String email, String password) {
+    StringResponse login (String email, String password) {
         User theUser = userRepository.findByEmail(email);
         if (theUser == null || !theUser.getPassword().equals(password)) {
-            return "User or password incorrect";
+            return new StringResponse("User or password incorrect");
         }
-        return "logged in";
+        return new StringResponse("logged in");
     }
 
     @GetMapping(path="/addFriend")

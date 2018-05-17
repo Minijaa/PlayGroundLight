@@ -26,9 +26,8 @@ public class User {
     @Size(max = 50)
     private String password;
 
-    @ManyToMany ( cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+    @OneToMany ( cascade = {
+            CascadeType.ALL
     })
     @JoinTable (
             name="friends",
