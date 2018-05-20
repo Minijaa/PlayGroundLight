@@ -26,14 +26,13 @@ public class User {
     @Size(max = 50)
     private String password;
 
-    @OneToMany ( cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable (
-            name="friends",
-            joinColumns = @JoinColumn(name="userOne"),
-            inverseJoinColumns = @JoinColumn(name="userTwo"))
-    private Set<User> friends = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL,
+    fetch = FetchType.LAZY
+    )
+    @JoinTable(name = "user_friendships",
+    joinColumns = {  @JoinColumn(name="user_id")},
+            inverseJoinColumns = { @JoinColumn(name="friend_id") })
+    private Set<Friendship> friends = new HashSet<>();
 
     public User () {
         //Empty, necessary for the repository
@@ -78,19 +77,18 @@ public class User {
     }
 
     public void addFriend(User friend) {
-        friends.add(friend);
+        Friendship hej = new Friendship();
+        hej.setFriend(friend);
+
+        friends.add(hej);
         System.out.println("adding: " + friend.getName() + " as friend to " + name + "\nFriendset now contains:");
-        for (User u : friends) {
-            System.out.println(u);
+        for (Friendship f : friends) {
+            System.out.println(f);
         }
     }
 
     public boolean isFriend(User u) {
         return friends.contains(u);
-    }
-
-    public Set<User> getFriends() {
-        return friends;
     }
 
     @Override

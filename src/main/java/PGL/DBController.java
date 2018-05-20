@@ -12,6 +12,8 @@ public class DBController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FriendshipRepository friendshipRepository;
 
 
     @GetMapping("/dbadd")
@@ -57,7 +59,6 @@ public class DBController {
         User two = userRepository.findByEmail(emailTwo);
         one.addFriend(two);
         two.addFriend(one);
-
         return "added";
     }
 
@@ -66,7 +67,7 @@ public class DBController {
     boolean isFriend(String emailOne, String emailTwo) {
         User one = userRepository.findByEmail(emailOne);
         User two = userRepository.findByEmail(emailTwo);
-        return one.isFriend(two);
+        return two.isFriend(one);
     }
 
 //    @GetMapping(path="/getFriends")
