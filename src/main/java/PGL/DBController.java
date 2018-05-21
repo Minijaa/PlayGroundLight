@@ -31,9 +31,9 @@ public class DBController {
 
     @GetMapping("/get")
     public @ResponseBody
-    String getByEmail(String email) {
+    StringResponse getByEmail(@RequestParam String email) {
         User theUser = userRepository.findByEmail(email);
-        return theUser.getName();
+        return new StringResponse(theUser.getName());
     }
 
     @GetMapping(path="/all")
