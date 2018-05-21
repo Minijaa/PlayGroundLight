@@ -39,7 +39,8 @@ public class Game {
                 timeStartInterval = 7;
                 timeStopInterval = 18;
                 initialDelay = 10;
-                imgurl = "assets/imgs/defaultmix.jpg";
+                //imgurl = "assets/imgs/defaultmix.jpg";
+                imgurl = "assets/imgs/runhere_text.jpg";
                 gameTitle = "Spring hit";
                 rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
@@ -47,15 +48,17 @@ public class Game {
                 timeStartInterval = 3;
                 timeStopInterval = 7;
                 initialDelay = 10;
-                imgurl = "assets/imgs/defaultred.jpg";
-                gameTitle = "Röda lampan";
+                //imgurl = "assets/imgs/defaultred.jpg";
+                imgurl = "assets/imgs/redlamp_text.jpg";
+                gameTitle = "Röda lyktan";
                 rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             case "danger":
                 timeStartInterval = 7;
                 timeStopInterval = 18;
                 initialDelay = 10;
-                imgurl = "assets/imgs/defaultblue.jpg";
+                //imgurl = "assets/imgs/defaultblue.jpg";
+                imgurl = "assets/imgs/danger_text.jpg";
                 gameTitle = "Farliga lampan";
                 rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
