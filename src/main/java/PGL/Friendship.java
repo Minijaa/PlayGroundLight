@@ -15,29 +15,53 @@ public class Friendship {
     @Column(name="friendship_id")
     private int id;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-    cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    },
-            mappedBy = "friends"
-    )
-    private Set<User> friends = new HashSet<>();
+
+    @Access(AccessType.PROPERTY)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userOne_id")
+    private User userOne;
+
+
+    @Access(AccessType.PROPERTY)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userTwo_id")
+    private User userTwo;
 
     public Friendship(){
 
     }
 
-    public void setFriend(User friend) {
-       friends.add(friend);
+    public Friendship(User one, User two) {
+        userOne = one;
+        userTwo = two;
     }
 
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        for (User u : friends) {
-            str.append(u + " , ");
-        }
-
-        return str.toString();
+    public int getId(){
+        return id;
     }
+
+    public void setId(int i){
+        id = i;
+    }
+
+    public void setUserOne(User u){
+        userOne = u;
+    }
+    public void setUserTwo(User u){
+        userOne = u;
+    }
+
+
+    public User getUserOne(){
+        return userOne;
+    }
+
+    public User getUserTwo(){
+        return userTwo;
+    }
+
+    public String toString(){
+        return userOne + ", " + userTwo;
+    }
+
 }

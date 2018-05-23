@@ -55,34 +55,28 @@ public class DBController {
     @GetMapping(path="/addFriend")
     public @ResponseBody
     String addFriend(String emailOne, String emailTwo) {
-        User one = userRepository.findByEmail(emailOne);
-        User two = userRepository.findByEmail(emailTwo);
+       User one = userRepository.findByEmail(emailOne);
+       User two = userRepository.findByEmail(emailTwo);
+       Friendship friend = new Friendship(one, two);
         one.addFriend(two);
-        two.addFriend(one);
+       friendshipRepository.save(friend);
+
         return "added";
     }
 
-    @GetMapping(path="/friend")
-    public @ResponseBody
-    boolean isFriend(String emailOne, String emailTwo) {
-        User one = userRepository.findByEmail(emailOne);
-        User two = userRepository.findByEmail(emailTwo);
-        return two.isFriend(one);
-    }
 
-//    @GetMapping(path="/getFriends")
-//    public @ResponseBody
-//    String getFriends(String email) {
-//        User theUser = userRepository.findByEmail(email);
-//        System.out.println("the user: " + theUser.getName());
-//        StringBuilder str = new StringBuilder();
-//
-//        for (User u : theUser.getFriends()) {
-//            str.append(u.getName());
-//            System.out.println(u.getName());
-//        }
-//
-//        return str.toString();
-//    }
+    @GetMapping(path="/getFriends")
+    public @ResponseBody
+    String getFriends(String email) {
+        User theUser = userRepository.findByEmail(email);
+        System.out.println("the user: " + theUser.getName());
+        StringBuilder str = new StringBuilder();
+
+        for (User f : theUser.getFriends()) {
+            str.append(f.getEmail() + ", ");
+        }
+
+        return str.toString();
+    }
 
 }

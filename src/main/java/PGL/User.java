@@ -7,11 +7,11 @@ import java.util.*;
 
 @Entity(name="User")
 @Table(name="users")
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name="user_id")
     private int id;
 
     @NotNull
@@ -26,13 +26,9 @@ public class User {
     @Size(max = 50)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.LAZY
-    )
-    @JoinTable(name = "user_friendships",
-    joinColumns = {  @JoinColumn(name="user_id")},
-            inverseJoinColumns = { @JoinColumn(name="friend_id") })
-    private Set<Friendship> friends = new HashSet<>();
+    @JoinTable
+    @OneToMany
+    private Set<User> friends = new HashSet<>();
 
     public User () {
         //Empty, necessary for the repository
@@ -76,19 +72,17 @@ public class User {
         this.password = password;
     }
 
-    public void addFriend(User friend) {
-        Friendship hej = new Friendship();
-        hej.setFriend(friend);
-
-        friends.add(hej);
-        System.out.println("adding: " + friend.getName() + " as friend to " + name + "\nFriendset now contains:");
-        for (Friendship f : friends) {
+    public void addFriend(User friend){
+        friends.add(friend);
+        System.out.println("friendship set: ");
+        for (User f : friends) {
             System.out.println(f);
         }
+
     }
 
-    public boolean isFriend(User u) {
-        return friends.contains(u);
+    public Set<User> getFriends() {
+        return friends;
     }
 
     @Override
