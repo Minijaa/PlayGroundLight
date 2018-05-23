@@ -1,10 +1,6 @@
 package PGL;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "friendship")
@@ -18,22 +14,22 @@ public class Friendship {
 
     @Access(AccessType.PROPERTY)
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userOne_id")
-    private User userOne;
+    @JoinColumn(name="user_id")
+    private User user;
 
 
     @Access(AccessType.PROPERTY)
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userTwo_id")
-    private User userTwo;
+    @JoinColumn(name="friend_id")
+    private User friend;
 
     public Friendship(){
 
     }
 
-    public Friendship(User one, User two) {
-        userOne = one;
-        userTwo = two;
+    public Friendship(User theUser, User theFriend) {
+        user = theUser;
+        friend = theFriend;
     }
 
     public int getId(){
@@ -44,24 +40,23 @@ public class Friendship {
         id = i;
     }
 
-    public void setUserOne(User u){
-        userOne = u;
+    public void setUser(User u){
+        user = u;
     }
-    public void setUserTwo(User u){
-        userOne = u;
-    }
-
-
-    public User getUserOne(){
-        return userOne;
+    public void setFriend(User u){
+        friend = u;
     }
 
-    public User getUserTwo(){
-        return userTwo;
+    public User getUser(){
+        return user;
+    }
+
+    public User getFriend(){
+        return friend;
     }
 
     public String toString(){
-        return userOne + ", " + userTwo;
+        return ""+ friend;
     }
 
 }

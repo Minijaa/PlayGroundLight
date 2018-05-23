@@ -8,6 +8,10 @@ public class StringResponse {
         data = s;
     }
 
+    public StringResponse(){
+        //empty
+    }
+
     @JsonProperty
     public String getData() {
         return data;

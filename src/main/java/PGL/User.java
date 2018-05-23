@@ -27,8 +27,8 @@ public class User{
     private String password;
 
     @JoinTable
-    @OneToMany
-    private Set<User> friends = new HashSet<>();
+    @ManyToMany
+    private Set<Friendship> friends = new HashSet<>();
 
     public User () {
         //Empty, necessary for the repository
@@ -72,16 +72,17 @@ public class User{
         this.password = password;
     }
 
-    public void addFriend(User friend){
+    public void addFriend(Friendship friend){
+
         friends.add(friend);
         System.out.println("friendship set: ");
-        for (User f : friends) {
+        for (Friendship f : friends) {
             System.out.println(f);
         }
 
     }
 
-    public Set<User> getFriends() {
+    public Set<Friendship> getFriends() {
         return friends;
     }
 

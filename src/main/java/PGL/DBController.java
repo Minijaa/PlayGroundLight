@@ -33,7 +33,25 @@ public class DBController {
     public @ResponseBody
     StringResponse getByEmail(@RequestParam String email) {
         User theUser = userRepository.findByEmail(email);
+        if (theUser == null) {
+            return new StringResponse("User doesn't exist");
+        }
         return new StringResponse(theUser.getName());
+    }
+
+    @GetMapping("/search")
+    public @ResponseBody
+    StringResponse[] getByName(@RequestParam String name) {
+        User[]theUser = userRepository.findByName(name);
+        StringResponse[] users = new StringResponse[theUser.length];
+
+        for (int i = 0 ; i < theUser.length ; i++){
+            System.out.println(theUser[i]);
+            StringResponse str = new StringResponse(theUser[i].getName());
+            users[i] = str;
+        }
+
+        return users;
     }
 
     @GetMapping(path="/all")
@@ -55,12 +73,19 @@ public class DBController {
     @GetMapping(path="/addFriend")
     public @ResponseBody
     String addFriend(String emailOne, String emailTwo) {
-       User one = userRepository.findByEmail(emailOne);
-       User two = userRepository.findByEmail(emailTwo);
-       Friendship friend = new Friendship(one, two);
-        one.addFriend(two);
-       friendshipRepository.save(friend);
+        User one = userRepository.findByEmail(emailOne);
+        User two = userRepository.findByEmail(emailTwo);
 
+        if (one == null || two == null) {
+            return "User doesn't exist";
+        }
+
+        Friendship friendship_one = new Friendship(one, two);
+        Friendship friendship_two = new Friendship(two, one);
+        one.addFriend(friendship_one);
+        friendshipRepository.save(friendship_one);
+        two.addFriend(friendship_two);
+        friendshipRepository.save(friendship_two);
         return "added";
     }
 
@@ -69,11 +94,15 @@ public class DBController {
     public @ResponseBody
     String getFriends(String email) {
         User theUser = userRepository.findByEmail(email);
-        System.out.println("the user: " + theUser.getName());
+
+        if (theUser == null) {
+            return "User doesn't exist";
+        }
+
         StringBuilder str = new StringBuilder();
 
-        for (User f : theUser.getFriends()) {
-            str.append(f.getEmail() + ", ");
+        for (Friendship f : theUser.getFriends()) {
+            str.append(f + ", ");
         }
 
         return str.toString();
