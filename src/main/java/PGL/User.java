@@ -27,7 +27,7 @@ public class User{
     private String password;
 
     @JoinTable
-    @ManyToMany
+    @OneToMany
     private Set<Friendship> friends = new HashSet<>();
 
     public User () {
