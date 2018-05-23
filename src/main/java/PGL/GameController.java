@@ -14,9 +14,10 @@ import java.util.Random;
 public class GameController {
     private LightPost[] lightPosts;
     private Game activeGame;
+    private int numberofLightposts = 3;
 
     public GameController() {
-        lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white")), new LightPost("LightPost4", c("white"))};
+        lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white"))}; //new LightPost("LightPost4", c("white"))
         games = new Game[]{(new Game("runhere", this)), new Game("redlamp", this), new Game("danger", this)};
     }
 
@@ -65,7 +66,8 @@ public class GameController {
                 activeGame = g;
                 //currentGame.setActive(true);
             }
-        }activeGame.setDifficulty("easy");
+        }
+        activeGame.setDifficulty("easy");
 
     }
 
@@ -115,7 +117,7 @@ public class GameController {
     }
 
     // Light a random lightpost with at specified color
-    public void lightRandomLightPost(int color) {
+    public void lightRandomLightPost(int color, String gameName) {
         if (color < 0 || color > 2) {
             throw new IllegalArgumentException("Illegal color");
         }
@@ -126,11 +128,13 @@ public class GameController {
         } else {
             offColor = 0;
         }
-        int lightPostToLight = rnd.nextInt(4);
-        while (lightPosts[lightPostToLight].getColor() == color) {
-            lightPostToLight = rnd.nextInt(4);
-        }
+        int lightPostToLight = rnd.nextInt(numberofLightposts);
 
+        if (gameName.equals("runhere")) {
+            while (lightPosts[lightPostToLight].getColor() == color) {
+                lightPostToLight = rnd.nextInt(numberofLightposts);
+            }
+        }
         lightAllLightPosts(offColor);
         lightPosts[lightPostToLight].setColor(color);
         for (LightPost l : lightPosts) {
@@ -148,5 +152,10 @@ public class GameController {
         for (LightPost l : lightPosts) {
             l.setColor(color);
         }
+    }
+
+    public void lightLightPost1(int color){
+        lightPosts[0].setColor(color);
+        System.out.println(lightPosts[0].getName() + " is lit with the color " + color);
     }
 }

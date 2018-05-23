@@ -6,9 +6,6 @@ import java.util.TimerTask;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Game {
@@ -25,6 +22,8 @@ public class Game {
     private int initialDelay;
     private int redGreenFlipCounter = 0; // Bör ändras till boolean
     private String difficulty = "easy";
+    private boolean lightYellow = false;
+    private boolean lightRed = false;
 
     public Game(String name) {
         this.name = name;
@@ -36,27 +35,27 @@ public class Game {
 
         switch (name) {
             case "runhere":
-                timeStartInterval = 7;
-                timeStopInterval = 18;
-                initialDelay = 10;
+                timeStartInterval = 5;//7;
+                timeStopInterval = 13;//18;
+                initialDelay = 5; //10;
                 //imgurl = "assets/imgs/defaultmix.jpg";
-                imgurl = "assets/imgs/runhere_text.jpg";
+                imgurl = "assets/imgs/runhere_blue.jpg";
                 gameTitle = "Spring hit";
-                rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
+                rules = "Spring hit – följ gröna ljuset \n 1. Alla lampor lyser gult. Barnen ställer sig under valfri lampa.\n 2. En av lamporna växlar till grönt. Sist till den åker ut!\n 3. Grön färg slingas mellan lamporna tills endast ett barn återstår.";
                 break;
             case "redlamp":
                 timeStartInterval = 3;
-                timeStopInterval = 7;
-                initialDelay = 10;
+                timeStopInterval = 5;
+                initialDelay = 5; //10;
                 //imgurl = "assets/imgs/defaultred.jpg";
-                imgurl = "assets/imgs/redlamp_text.jpg";
+                imgurl = "assets/imgs/redlight_purple.jpg";
                 gameTitle = "Röda lyktan";
                 rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             case "danger":
-                timeStartInterval = 7;
-                timeStopInterval = 18;
-                initialDelay = 10;
+                timeStartInterval = 9;
+                timeStopInterval = 10;
+                initialDelay = 5; //10;
                 //imgurl = "assets/imgs/defaultblue.jpg";
                 imgurl = "assets/imgs/danger_text.jpg";
                 gameTitle = "Farliga lampan";
@@ -114,7 +113,17 @@ public class Game {
                 break;
             case "redlamp":
                 System.out.println("Röda lampan startad");
-                startGameRedLamp(true);
+                //startGameRedLamp(true);
+                setLightPost1Red(!lightRed);
+                lightRed = !lightRed;
+        }
+    }
+
+    private void setLightPost1Red(boolean lightRed) {
+        if (lightRed){
+            gc.lightLightPost1(gc.c("red"));
+        }else {
+            gc.lightLightPost1(gc.c("green"));
         }
     }
 
@@ -143,7 +152,7 @@ public class Game {
     }
 
     private void startGameRedLamp(boolean firstRun) {
-        int nextRandom = ran.nextInt((getRealStartInterval(name,false) - getRealStartInterval(name, true))) + getRealStartInterval(name, true);
+        int nextRandom = ran.nextInt((getRealStartInterval(name, false) - getRealStartInterval(name, true))) + getRealStartInterval(name, true);
         if (firstRun) {
             delay = initialDelay * 1000;
             // Gör alla stolpar gula
@@ -185,19 +194,41 @@ public class Game {
         //Första delayen ska vara hårdkodad. Under delayen ska också alla lampor vara tända gula.
         if (firstRun) {
             delay = initialDelay * 1000;
+            System.out.println("GUL syns i " + delay / 1000 + " sek");
             // Gör alla stolpar gula
             gc.lightAllLightPosts(gc.c("yellow"));
+            lightYellow = false;
 
         } else {
             delay = nextRandom * 1000;
+        }
+
+        if (lightYellow && name.equals("danger")) {
+            //Bestämmer längden för RÖD/GRÖN - fasen i spelet Farliga lampan.
+            delay = 5000;
+            System.out.println("RÖD / GRÖN syns i " + delay / 1000 + " sek");
+        } else {
+            if (name.equals("danger")) {
+                System.out.println("GUL syns i " + delay / 1000 + " sek");
+            } else {
+                System.out.println("NY GRÖN OM " + delay / 1000 + " sek");
+            }
         }
         lightLitDurationTimer = new Timer("lightduration", true);
 
         lightLitDurationTimer.schedule(new TimerTask() {
             public void run() {
-                //Tänd en random lampa med vald färg.
-                gc.lightRandomLightPost(color);
-                System.out.println("delay = " + delay / 1000 + " sekunder ");
+
+                if (lightYellow && name.equals("danger")) {
+                    gc.lightAllLightPosts(gc.c("yellow"));
+
+                } else {
+                    //Tänd en random lampa med vald färg.
+                    gc.lightRandomLightPost(color, name);
+                }
+
+                //System.out.println("delay = " + delay / 1000 + " sekunder ");
+                lightYellow = !lightYellow;
                 lightLitDurationTimer.cancel();
                 startGameRunHereOrDanger(color, false);
             }
