@@ -123,7 +123,7 @@ public class DBController {
 
         for (int i = 0 ; i < friends.length ; i++) {
             System.out.println("loop");
-            
+
             if (friends[i].getFriend().isOnline()) {
                 System.out.println("if sats");
                 onlineFriends[i] = new StringResponse("hej");

@@ -66,6 +66,10 @@ public class User{
         this.online = online;
     }
 
+    /**
+     * Slumpar ett nummer mellan 0 och 5000, är det jämt sätts online till true.
+     * Om online blir true så slumpas checked_in och lägger eventuellt till en lekpark
+     */
     public void setRandomOnline(){
         Random rnd = new Random();
         int number = rnd.nextInt(5000);
@@ -73,7 +77,7 @@ public class User{
             online = true;
 
         }
-        if (online==true){
+        if (online){
             number = rnd.nextInt(5000);
             if (number%2 == 0) {
                 checkedInPlayground = "A playground";
