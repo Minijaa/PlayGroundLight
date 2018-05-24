@@ -133,6 +133,30 @@ public class DBController {
         return onlineFriends.toArray(new StringResponse[onlineFriends.size()]);
     }
 
+    @GetMapping(path = "/offline")
+    public @ResponseBody
+    StringResponse[] getOfflineFriends(@RequestParam String email){
+
+        User theUser = userRepository.findByEmail(email);
+
+        if (theUser == null){
+            return new StringResponse[0];
+        }
+
+        Set<Friendship> temp = theUser.getFriends();
+        Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
+        ArrayList<StringResponse> offlineFriends = new ArrayList<>();
+
+        for (int i = 0 ; i < friends.length ; i++) {
+
+            if (!friends[i].getFriend().isOnline()) {
+                offlineFriends.add(new StringResponse(""+friends[i].getFriend()));
+            }
+        }
+
+        return offlineFriends.toArray(new StringResponse[offlineFriends.size()]);
+    }
+
     @GetMapping(path="/random")
     public @ResponseBody
     StringResponse random(){

@@ -75,12 +75,15 @@ public class User{
         int number = rnd.nextInt(5000);
         if (number%2 == 0){
             online = true;
-
+        }
+        else{
+            online = false;
         }
         if (online){
             number = rnd.nextInt(5000);
             if (number%2 == 0) {
-                checkedInPlayground = "A playground";
+                checkedInPlayground = "Truddelutten";
+                System.out.println(name + " got a checked in playground");
             }
         }
         System.out.println(name + " " + online);
