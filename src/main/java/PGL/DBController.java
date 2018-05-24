@@ -40,6 +40,20 @@ public class DBController {
         return new StringResponse(theUser.getName());
     }
 
+    @GetMapping("/getUser")
+    public @ResponseBody
+    UserJson getUser(@RequestParam String email) {
+        User temp = userRepository.findByEmail(email);
+        if (temp == null) {
+            return new UserJson();
+        }
+        UserJson theUser = new UserJson(temp);
+        return theUser;
+    }
+
+    /**
+     * SKA ÄNDRAS
+     */
     @GetMapping("/search")
     public @ResponseBody
     StringResponse[] getByName(@RequestParam String name) {
@@ -90,47 +104,53 @@ public class DBController {
         return "added";
     }
 
-
+    /**
+     * SKA ÄNDRAS
+     * @param email
+     * @return
+     */
     @GetMapping(path="/getFriends")
     public @ResponseBody
-    String getFriends(String email) {
+    UserJson[] getFriends(String email) {
         User theUser = userRepository.findByEmail(email);
 
         if (theUser == null) {
-            return "User doesn't exist";
-        }
-
-        StringBuilder str = new StringBuilder();
-
-        for (Friendship f : theUser.getFriends()) {
-            str.append(f + ", ");
-        }
-
-        return str.toString();
-    }
-
-    @GetMapping(path = "/online")
-    public @ResponseBody
-    StringResponse[] getOnlineFriends(@RequestParam String email){
-
-        User theUser = userRepository.findByEmail(email);
-
-        if (theUser == null){
-            return new StringResponse[0];
+            return new UserJson[0];
         }
 
         Set<Friendship> temp = theUser.getFriends();
         Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
-        ArrayList<StringResponse> onlineFriends = new ArrayList<>();
+        UserJson[] jsonFriends = new UserJson[friends.length];
+
+        for (int i = 0 ; i < friends.length ; i++) {
+            User tempUser = friends[i].getFriend();
+            jsonFriends[i] = new UserJson(tempUser);
+        }
+
+        return jsonFriends;
+    }
+
+    @GetMapping(path = "/online")
+    public @ResponseBody
+    UserJson[] getOnlineFriends(@RequestParam String email){
+
+        User theUser = userRepository.findByEmail(email);
+
+        if (theUser == null){
+            return new UserJson[0];
+        }
+
+        Set<Friendship> temp = theUser.getFriends();
+        Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
+        ArrayList<UserJson> onlineFriends = new ArrayList<>();
 
         for (int i = 0 ; i < friends.length ; i++) {
 
             if (friends[i].getFriend().isOnline()) {
-                onlineFriends.add(new StringResponse(""+friends[i].getFriend()));
+                onlineFriends.add(new UserJson(friends[i].getFriend()));
             }
         }
-
-        return onlineFriends.toArray(new StringResponse[onlineFriends.size()]);
+        return onlineFriends.toArray(new UserJson[onlineFriends.size()]);
     }
 
     @GetMapping(path = "/offline")
