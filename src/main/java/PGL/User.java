@@ -79,11 +79,12 @@ public class User{
         else{
             online = false;
             checkedIn = false;
+            checkedInPlayground = "";
         }
         if (online){
             number = rnd.nextInt(5000);
             if (number%2 == 0) {
-                checkedInPlayground = "Truddelutten";
+                checkedInPlayground = "a091564e-b6d1-43fa-abfb-b1f8b400b0ff";
                 checkedIn = true;
                 System.out.println(name + " got a checked in playground");
             }
