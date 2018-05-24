@@ -35,8 +35,8 @@ public class Game {
 
         switch (name) {
             case "runhere":
-                timeStartInterval = 5;//7;
-                timeStopInterval = 13;//18;
+                timeStartInterval = 6;//7;
+                timeStopInterval = 7;//18;
                 initialDelay = 5; //10;
                 //imgurl = "assets/imgs/defaultmix.jpg";
                 imgurl = "assets/imgs/runhere_blue.jpg";
@@ -53,8 +53,8 @@ public class Game {
                 rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             case "danger":
-                timeStartInterval = 9;
-                timeStopInterval = 10;
+                timeStartInterval = 5; //Bestämmer hur länge det ska lysa gult (Springtid mellan lampor)
+                timeStopInterval = 6;
                 initialDelay = 5; //10;
                 //imgurl = "assets/imgs/defaultblue.jpg";
                 imgurl = "assets/imgs/danger_text.jpg";
