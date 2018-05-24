@@ -10,14 +10,16 @@ import java.util.Random;
 
 @JsonAutoDetect
 @RestController
-@CrossOrigin(origins = {"http://192.*", "http://localhost:8100", "10.200.3.220", "file://", "http://localhost:8000", "127.0.0.1", "http://192.168.0.14:8000", "http://192.168.0.14:8080", "http://192.168.0.14:80", "http://192.168.0.17:8000", "http://192.168.0.17:80", "http://10.200.3.220:8000", "https://www.musikshopen.com:8000", "https://www.musikshopen.com", "https://www.musikshopen.com:8100", "https://www.musikshopen.com:443"})
+@CrossOrigin(origins = {"file://","http://10.200.41.82:8100","http://10.200.41.82:80","http://10.200.41.82:8080","http://localhost:8080", "http://10.200.49.150:8080","http://10.200.49.150:8000", "http://localhost:8000", "http://localhost:8100", "http://10.200.49.150:8100"})
+//"http://10.*","10.*","10.200.49.150:8080", "http://192.*", "http://localhost:8100", "10.200.3.220", "file://", "http://localhost:8000", "127.0.0.1", "http://192.168.0.14:8000", "http://192.168.0.14:8080", "http://192.168.0.14:80", "http://192.168.0.17:8000", "http://192.168.0.17:80", "http://10.200.3.220:8000", "https://www.musikshopen.com:8000", "https://www.musikshopen.com", "https://www.musikshopen.com:8100", "https://www.musikshopen.com:443", "http://10.200.49.150:8080", "http://10.200.49.150:8000"
+// "10.*:8000", "10.200.4.148:8000","10.200.4.148:8080","10.200.49.150",
 public class GameController {
     private LightPost[] lightPosts;
     private Game activeGame;
-    private int numberofLightposts = 3;
+    private int numberofLightposts = 4;
 
     public GameController() {
-        lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white"))}; //new LightPost("LightPost4", c("white"))
+        lightPosts = new LightPost[]{new LightPost("LightPost1", c("white")), new LightPost("LightPost2", c("white")), new LightPost("LightPost3", c("white")), new LightPost("LightPost4", c("white"))};
         games = new Game[]{(new Game("runhere", this)), new Game("redlamp", this), new Game("danger", this)};
     }
 
