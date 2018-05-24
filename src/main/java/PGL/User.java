@@ -26,6 +26,12 @@ public class User{
     @Size(max = 50)
     private String password;
 
+    private boolean online;
+
+    private boolean checkedIn;
+
+    private String checkedInPlayground;
+
     @JoinTable
     @OneToMany
     private Set<Friendship> friends = new HashSet<>();
@@ -38,6 +44,43 @@ public class User{
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public boolean isCheckedIn() {
+        return checkedIn;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public String getCheckedInPlayground() {
+        return checkedInPlayground;
+    }
+
+    public void setCheckedIn(boolean checkedIn) {
+        this.checkedIn = checkedIn;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    public void setRandomOnline(){
+        Random rnd = new Random();
+        int number = rnd.nextInt(5000);
+        if (number%2 == 0){
+            online = true;
+
+        }
+        if (online==true){
+            number = rnd.nextInt(5000);
+            if (number%2 == 0) {
+                checkedInPlayground = "A playground";
+            }
+        }
+        System.out.println(name + " " + online);
+
     }
 
     public int getId() {

@@ -108,4 +108,41 @@ public class DBController {
         return str.toString();
     }
 
+    @GetMapping(path = "/online")
+    public @ResponseBody
+    StringResponse[] getOnlineFriends(@RequestParam String email){
+
+        User theUser = userRepository.findByEmail(email);
+
+        if (theUser == null){
+            return new StringResponse[0];
+        }
+        Set<Friendship> temp = theUser.getFriends();
+        Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
+        StringResponse[] onlineFriends = new StringResponse[friends.length];
+
+        for (int i = 0 ; i < friends.length ; i++) {
+            System.out.println("loop");
+            
+            if (friends[i].getFriend().isOnline()) {
+                System.out.println("if sats");
+                onlineFriends[i] = new StringResponse("hej");
+            }
+            System.out.println("utanför if sats");
+        }
+        return onlineFriends;
+    }
+
+    @GetMapping(path="/random")
+    public @ResponseBody
+    StringResponse random(){
+        Iterable<User> theUsers = userRepository.findAll();
+
+        for (User u : theUsers){
+            u.setRandomOnline();
+        }
+
+        return new StringResponse("hej");
+    }
+
 }
