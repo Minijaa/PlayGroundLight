@@ -26,11 +26,11 @@ public class User{
     @Size(max = 50)
     private String password;
 
-    private boolean online;
+    private boolean online = false;
 
-    private boolean checkedIn;
+    private boolean checkedIn = false;
 
-    private String checkedInPlayground;
+    private String checkedInPlayground = "";
 
     @JoinTable
     @OneToMany

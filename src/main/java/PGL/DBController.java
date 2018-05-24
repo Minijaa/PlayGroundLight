@@ -3,6 +3,7 @@ package PGL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 @RestController
@@ -117,20 +118,19 @@ public class DBController {
         if (theUser == null){
             return new StringResponse[0];
         }
+
         Set<Friendship> temp = theUser.getFriends();
         Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
-        StringResponse[] onlineFriends = new StringResponse[friends.length];
+        ArrayList<StringResponse> onlineFriends = new ArrayList<>();
 
         for (int i = 0 ; i < friends.length ; i++) {
-            System.out.println("loop");
 
             if (friends[i].getFriend().isOnline()) {
-                System.out.println("if sats");
-                onlineFriends[i] = new StringResponse("hej");
+                onlineFriends.add(new StringResponse(""+friends[i].getFriend()));
             }
-            System.out.println("utanför if sats");
         }
-        return onlineFriends;
+
+        return onlineFriends.toArray(new StringResponse[onlineFriends.size()]);
     }
 
     @GetMapping(path="/random")
@@ -142,7 +142,9 @@ public class DBController {
             u.setRandomOnline();
         }
 
-        return new StringResponse("hej");
+        userRepository.saveAll(theUsers);
+
+        return new StringResponse("blandat");
     }
 
 }
