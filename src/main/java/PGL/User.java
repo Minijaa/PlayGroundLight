@@ -78,11 +78,13 @@ public class User{
         }
         else{
             online = false;
+            checkedIn = false;
         }
         if (online){
             number = rnd.nextInt(5000);
             if (number%2 == 0) {
                 checkedInPlayground = "Truddelutten";
+                checkedIn = true;
                 System.out.println(name + " got a checked in playground");
             }
         }
