@@ -104,11 +104,6 @@ public class DBController {
         return "added";
     }
 
-    /**
-     * SKA ÄNDRAS
-     * @param email
-     * @return
-     */
     @GetMapping(path="/getFriends")
     public @ResponseBody
     UserJson[] getFriends(String email) {
@@ -130,52 +125,6 @@ public class DBController {
         return jsonFriends;
     }
 
-    @GetMapping(path = "/online")
-    public @ResponseBody
-    UserJson[] getOnlineFriends(@RequestParam String email){
-
-        User theUser = userRepository.findByEmail(email);
-
-        if (theUser == null){
-            return new UserJson[0];
-        }
-
-        Set<Friendship> temp = theUser.getFriends();
-        Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
-        ArrayList<UserJson> onlineFriends = new ArrayList<>();
-
-        for (int i = 0 ; i < friends.length ; i++) {
-
-            if (friends[i].getFriend().isOnline()) {
-                onlineFriends.add(new UserJson(friends[i].getFriend()));
-            }
-        }
-        return onlineFriends.toArray(new UserJson[onlineFriends.size()]);
-    }
-
-    @GetMapping(path = "/offline")
-    public @ResponseBody
-    StringResponse[] getOfflineFriends(@RequestParam String email){
-
-        User theUser = userRepository.findByEmail(email);
-
-        if (theUser == null){
-            return new StringResponse[0];
-        }
-
-        Set<Friendship> temp = theUser.getFriends();
-        Friendship[] friends = temp.toArray(new Friendship[temp.size()]);
-        ArrayList<StringResponse> offlineFriends = new ArrayList<>();
-
-        for (int i = 0 ; i < friends.length ; i++) {
-
-            if (!friends[i].getFriend().isOnline()) {
-                offlineFriends.add(new StringResponse(""+friends[i].getFriend()));
-            }
-        }
-
-        return offlineFriends.toArray(new StringResponse[offlineFriends.size()]);
-    }
 
     @GetMapping(path="/random")
     public @ResponseBody
