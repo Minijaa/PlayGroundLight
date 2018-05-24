@@ -43,7 +43,7 @@ public class DBController {
     @GetMapping("/search")
     public @ResponseBody
     StringResponse[] getByName(@RequestParam String name) {
-        User[]theUser = userRepository.findByName(name);
+        User[]theUser = userRepository.findByNameStartingWith(name);
         StringResponse[] users = new StringResponse[theUser.length];
 
         for (int i = 0 ; i < theUser.length ; i++){
