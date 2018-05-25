@@ -57,7 +57,7 @@ public class DBController {
     UserJson[] getByName(@RequestParam String name) {
         User[]theUsers = userRepository.findByNameStartingWith(name);
 
-        if (theUsers == null || theUsers[0] == null){
+        if (theUsers == null || theUsers[0] == null || name == null || name.equals("")){
             return new UserJson[0];
         }
 
