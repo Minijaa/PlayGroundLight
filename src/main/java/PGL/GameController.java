@@ -51,7 +51,7 @@ public class GameController {
 
     @RequestMapping("/difficulty")
     public void setDifficulty(
-            @RequestParam(value = "level", defaultValue = "easy") String diff) {
+            @RequestParam(value = "level", defaultValue = "medium") String diff) {
 
         activeGame.setDifficulty(diff);
         System.out.println(activeGame.getName());
@@ -69,7 +69,7 @@ public class GameController {
                 //currentGame.setActive(true);
             }
         }
-        activeGame.setDifficulty("easy");
+        activeGame.setDifficulty("medium");
 
     }
 

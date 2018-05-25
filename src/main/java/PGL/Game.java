@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Game {
     private String name;
     private String gameTitle;
-    private String rules;
+    private String[] rules;
+    private String gameHeading;
     private String imgurl;
     private int timeStartInterval;
     private int timeStopInterval;
@@ -21,7 +22,7 @@ public class Game {
     private int delay;
     private int initialDelay;
     private int redGreenFlipCounter = 0; // Bör ändras till boolean
-    private String difficulty = "easy";
+    private String difficulty = "medium";
     private boolean lightYellow = false;
     private boolean lightRed = false;
 
@@ -41,7 +42,8 @@ public class Game {
                 //imgurl = "assets/imgs/defaultmix.jpg";
                 imgurl = "assets/imgs/runhere_blue.jpg";
                 gameTitle = "Spring hit";
-                rules = "Spring hit – följ gröna ljuset \n 1. Alla lampor lyser gult. Barnen ställer sig under valfri lampa.\n 2. En av lamporna växlar till grönt. Sist till den åker ut!\n 3. Grön färg slingas mellan lamporna tills endast ett barn återstår.";
+                gameHeading = "Spring hit – följ grönt ljus";
+                rules = new String[]{"1. Alla lampor lyser gult. Barnen ställer sig under valfri lampa.", "2. En av lamporna växlar till grönt. Sist till den åker ut!","3. Grön färg slingas mellan lamporna tills endast ett barn återstår."};
                 break;
             case "redlamp":
                 timeStartInterval = 3;
@@ -50,7 +52,7 @@ public class Game {
                 //imgurl = "assets/imgs/defaultred.jpg";
                 imgurl = "assets/imgs/redlight_purple.jpg";
                 gameTitle = "Röda lyktan";
-                rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
+                //rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             case "danger":
                 timeStartInterval = 5; //Bestämmer hur länge det ska lysa gult (Springtid mellan lampor)
@@ -59,7 +61,7 @@ public class Game {
                 //imgurl = "assets/imgs/defaultblue.jpg";
                 imgurl = "assets/imgs/danger_text.jpg";
                 gameTitle = "Farliga lampan";
-                rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
+                //rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             default:
                 throw new IllegalArgumentException("Illegal Game Type");
@@ -72,7 +74,7 @@ public class Game {
     }
 
     @JsonProperty
-    public String getRules() {
+    public String[] getRules() {
         return rules;
     }
 
@@ -114,14 +116,22 @@ public class Game {
             case "redlamp":
                 System.out.println("Röda lampan startad");
                 //startGameRedLamp(true);
-                setLightPost1Red(!lightRed);
+                setLightPost1Red(lightRed);
                 lightRed = !lightRed;
         }
     }
 
     private void setLightPost1Red(boolean lightRed) {
         if (lightRed){
-            gc.lightLightPost1(gc.c("red"));
+            lightLitDurationTimer = new Timer("lightduration", true);
+            gc.lightLightPost1(gc.c("yellow"));
+            lightLitDurationTimer.schedule(new TimerTask() {
+                public void run() {
+                    gc.lightLightPost1(gc.c("red"));
+                    lightLitDurationTimer.cancel();
+                }
+            }, 1050);
+
         }else {
             gc.lightLightPost1(gc.c("green"));
         }
@@ -205,7 +215,7 @@ public class Game {
 
         if (lightYellow && name.equals("danger")) {
             //Bestämmer längden för RÖD/GRÖN - fasen i spelet Farliga lampan.
-            delay = 5000;
+            delay = 4000;
             System.out.println("RÖD / GRÖN syns i " + delay / 1000 + " sek");
         } else {
             if (name.equals("danger")) {
@@ -252,5 +262,10 @@ public class Game {
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
 
+    }
+
+    @JsonProperty
+    public String getGameHeading() {
+        return gameHeading;
     }
 }
