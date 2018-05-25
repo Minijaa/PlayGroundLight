@@ -51,22 +51,25 @@ public class DBController {
         return theUser;
     }
 
-    /**
-     * SKA ÄNDRAS
-     */
+
     @GetMapping("/search")
     public @ResponseBody
-    StringResponse[] getByName(@RequestParam String name) {
-        User[]theUser = userRepository.findByNameStartingWith(name);
-        StringResponse[] users = new StringResponse[theUser.length];
+    UserJson[] getByName(@RequestParam String name) {
+        User[]theUsers = userRepository.findByNameStartingWith(name);
 
-        for (int i = 0 ; i < theUser.length ; i++){
-            System.out.println(theUser[i]);
-            StringResponse str = new StringResponse(theUser[i].getName());
-            users[i] = str;
+        if (theUsers == null || theUsers[0] == null){
+            return new UserJson[0];
         }
 
-        return users;
+        UserJson[] results = new UserJson[theUsers.length];
+
+        for (int i = 0 ; i < theUsers.length ; i++){
+                User tempUser = theUsers[i];
+                results[i] = new UserJson(tempUser);
+
+        }
+
+        return results;
     }
 
     @GetMapping(path="/all")
@@ -87,12 +90,12 @@ public class DBController {
 
     @GetMapping(path="/addFriend")
     public @ResponseBody
-    String addFriend(String emailOne, String emailTwo) {
+    StringResponse addFriend(String emailOne, String emailTwo) {
         User one = userRepository.findByEmail(emailOne);
         User two = userRepository.findByEmail(emailTwo);
 
         if (one == null || two == null) {
-            return "User doesn't exist";
+            return new StringResponse("User doesn't exist");
         }
 
         Friendship friendship_one = new Friendship(one, two);
@@ -101,7 +104,17 @@ public class DBController {
         friendshipRepository.save(friendship_one);
         two.addFriend(friendship_two);
         friendshipRepository.save(friendship_two);
-        return "added";
+        return new StringResponse("added");
+    }
+
+    @GetMapping(path="/changePassword")
+    public void changePassword(@RequestParam String email, @RequestParam String password){
+        User theUser = userRepository.findByEmail(email);
+        if (theUser != null){
+            theUser.setPassword(password);
+            System.out.println(theUser + " changed");
+            userRepository.save(theUser);
+        }
     }
 
     @GetMapping(path="/getFriends")
