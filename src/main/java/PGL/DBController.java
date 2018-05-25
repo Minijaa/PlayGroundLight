@@ -68,7 +68,7 @@ public class DBController {
                 results[i] = new UserJson(tempUser);
 
         }
-
+        Arrays.sort(results, new NameComparator());
         return results;
     }
 
@@ -134,7 +134,7 @@ public class DBController {
             User tempUser = friends[i].getFriend();
             jsonFriends[i] = new UserJson(tempUser);
         }
-
+        Arrays.sort(jsonFriends, new NameComparator());
         return jsonFriends;
     }
 
@@ -151,6 +151,12 @@ public class DBController {
         userRepository.saveAll(theUsers);
 
         return new StringResponse("blandat");
+    }
+
+    class NameComparator implements Comparator<UserJson> {
+        public int compare(UserJson uj1, UserJson uj2) {
+            return uj1.getName().compareToIgnoreCase(uj2.getName());
+        }
     }
 
 }
