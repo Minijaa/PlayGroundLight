@@ -43,7 +43,7 @@ public class Game {
                 imgurl = "assets/imgs/runhere_blue.jpg";
                 gameTitle = "Spring hit";
                 gameHeading = "Spring hit – följ grönt ljus";
-                rules = new String[]{"1. Alla lampor lyser gult. Barnen ställer sig under valfri lampa.", "2. En av lamporna växlar till grönt. Sist till den åker ut!","3. Grön färg slingas mellan lamporna tills endast ett barn återstår."};
+                rules = new String[]{"1. Alla lampor lyser gult. Barnen ställer sig under samma lampa.", "2. En av lamporna växlar till grönt. Sist till den åker ut!","3. Grön färg slingas mellan lamporna tills endast ett barn återstår."};
                 break;
             case "redlamp":
                 timeStartInterval = 3;
@@ -52,6 +52,11 @@ public class Game {
                 //imgurl = "assets/imgs/defaultred.jpg";
                 imgurl = "assets/imgs/redlight_purple.jpg";
                 gameTitle = "Röda lyktan";
+                gameHeading = "Röda lyktan – nå lampan först";
+                rules = new String[]{"1. Alla barn står vid en startlinje vända mot en lampa.",
+                        "2. Färgen växlar till grönt, det är fritt fram att röra sig mot lampan.",
+                        "3. Färgen växlar till rött, barnen måste stå helt stilla. Den som rör på sig får börja om från startlinjen.",
+                        "4. Färgerna växlar mellan rött och grönt. Försten till lampan har vunnit."};
                 //rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             case "danger":
@@ -61,6 +66,11 @@ public class Game {
                 //imgurl = "assets/imgs/defaultblue.jpg";
                 imgurl = "assets/imgs/danger_text.jpg";
                 gameTitle = "Farliga lampan";
+                gameHeading = "Farliga lampan – akta rött";
+                rules = new String[]{"1. Alla lampor lyser gult. Varje barn ställer sig under valfri lampa.",
+                        "2. En lampa växlar till rött, de andra till grönt. Om någon står under röd lampa åker hen ut."
+                        ,"3. Alla lampor växlar till gult igen. Barnen springer till varsin ny lampa."
+                        ,"4. Färgerna växlar tills ett barn återstår."};
                 //rules = "Låt alla barn ställa sig mot lampan som lyser gult, detta är startfärgen. Efter 10 sekunder börjar lampan växla mellan rött och grönt. Vid grönt rör sig deltagarna mot lampan. När lampan plötsligt blir röd måste alla barnen stå helt stilla. Den som rör sig kallas tillbaka till startlinjen. Den som först når fram till lyktstolpen vinner. ";
                 break;
             default:
