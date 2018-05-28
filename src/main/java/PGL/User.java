@@ -86,7 +86,7 @@ public class User{
             if (number%2 == 0) {
                 number = rnd.nextInt(5000);
                 if (number%2 == 0) {
-                    checkedInPlayground = "Truddelutten";
+                    checkedInPlayground = "Vasaparken";
                     checkedIn = true;
                 }
                 else{
