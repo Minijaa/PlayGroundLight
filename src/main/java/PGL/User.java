@@ -84,9 +84,15 @@ public class User{
         if (online){
             number = rnd.nextInt(5000);
             if (number%2 == 0) {
-                checkedInPlayground = "a091564e-b6d1-43fa-abfb-b1f8b400b0ff";
-                checkedIn = true;
-                System.out.println(name + " got a checked in playground");
+                number = rnd.nextInt(5000);
+                if (number%2 == 0) {
+                    checkedInPlayground = "Truddelutten";
+                    checkedIn = true;
+                }
+                else{
+                    checkedInPlayground = "L70";
+                    checkedIn = true;
+                }
             }
         }
         System.out.println(name + " " + online);
