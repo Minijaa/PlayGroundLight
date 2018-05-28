@@ -135,6 +135,7 @@ public class DBController {
             jsonFriends[i] = new UserJson(tempUser);
         }
         Arrays.sort(jsonFriends, new NameComparator());
+        Arrays.sort(jsonFriends, new CheckedInComparator());
         return jsonFriends;
     }
 
@@ -156,6 +157,12 @@ public class DBController {
     class NameComparator implements Comparator<UserJson> {
         public int compare(UserJson uj1, UserJson uj2) {
             return uj1.getName().compareToIgnoreCase(uj2.getName());
+        }
+    }
+
+    class CheckedInComparator implements Comparator<UserJson> {
+        public int compare(UserJson uj1, UserJson uj2) {
+            return Boolean.compare(uj2.isCheckedIn(), uj1.isCheckedIn());
         }
     }
 
