@@ -90,7 +90,7 @@ public class User{
                     checkedIn = true;
                 }
                 else{
-                    checkedInPlayground = "L70";
+                    checkedInPlayground = "Signalparken";
                     checkedIn = true;
                 }
             }
